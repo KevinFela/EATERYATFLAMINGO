@@ -20,7 +20,7 @@
 }
 
 body {
-    background-color: var(--primary-light);
+    background-color: #ffffff;
     color: var(--text-primary);
     line-height: 1.6;
 }
@@ -34,7 +34,7 @@ body {
 
 /* Header Styles */
 header {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: #ffffff;
     box-shadow: 0 2px 20px var(--shadow-light);
     position: fixed;
     width: 100%;
@@ -76,6 +76,11 @@ header {
 .logo-text span {
     color: var(--accent-pink);
     font-weight: 700;
+}
+
+/* Navigation Styles */
+nav {
+    display: block;
 }
 
 nav ul {
@@ -268,7 +273,7 @@ nav ul li a.active::after {
 
 /* Footer */
 footer {
-    background-color: var(--primary-light);
+    background-color: #ffffff;
     color: var(--text-primary);
     padding: 80px 0 30px;
     border-top: 1px solid var(--border-color);
@@ -465,9 +470,10 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: var(--primary-light);
+        background-color: #ffffff;
         box-shadow: 0 5px 10px var(--shadow-light);
         padding: 20px;
+        z-index: 1001;
     }
 
     nav.active {
