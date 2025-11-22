@@ -23,7 +23,7 @@ body {
     background-color: #ffffff;
     color: var(--text-primary);
     line-height: 1.6;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
 }
 
 .container {
@@ -55,7 +55,7 @@ header {
     align-items: center;
     text-decoration: none;
     color: inherit;
-    z-index: 1002; /* Ensure logo stays above mobile menu */
+    z-index: 1002;
 }
 
 .logo-image {
@@ -129,7 +129,7 @@ nav ul li a.active::after {
     font-size: 24px;
     cursor: pointer;
     color: var(--text-primary);
-    z-index: 1002; /* Ensure menu icon stays above mobile menu */
+    z-index: 1002;
     transition: var(--transition);
 }
 
@@ -466,7 +466,7 @@ footer {
     font-size: 16px;
 }
 
-/* Media Queries - FIXED MOBILE NAVIGATION */
+/* Media Queries - OPTIMIZED FOR DESKTOP-LIKE MOBILE VIEW */
 @media (max-width: 768px) {
     nav {
         display: none;
@@ -498,7 +498,7 @@ footer {
     }
 
     nav ul li a {
-        font-size: 1.2rem;
+        font-size: 1.2rem; /* Larger font for mobile navigation */
         padding: 10px 0;
         display: block;
         width: 100%;
@@ -511,11 +511,13 @@ footer {
     }
 
     .mobile-menu.active i::before {
-        content: "\f00d"; /* Font Awesome X icon */
+        content: "\f00d";
     }
 
+    /* Maintain larger font sizes for mobile */
     .section-title {
-        font-size: 2rem;
+        font-size: 2.2rem; /* Only slightly smaller than desktop */
+        margin-bottom: 40px;
     }
 
     .logo-text {
@@ -528,6 +530,14 @@ footer {
 
     .content-container {
         flex-direction: column;
+    }
+
+    .content-text h2 {
+        font-size: 2.2rem; /* Maintain larger font size */
+    }
+
+    .content-text p {
+        font-size: 1.1rem; /* Slightly larger for readability */
     }
 
     .form-row {
@@ -548,11 +558,29 @@ footer {
     .image-viewer-next {
         right: 10px;
     }
+
+    /* Footer adjustments */
+    .footer-content {
+        gap: 30px;
+    }
+
+    .footer-column h3 {
+        font-size: 1.2rem;
+    }
+
+    .footer-column ul li {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Even smaller screens get slightly smaller fonts but still readable */
     .section-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     
     .content-text h2 {
@@ -564,8 +592,10 @@ footer {
         height: 35px;
         font-size: 20px;
     }
-    
-    .container {
-        padding: 0 15px;
+
+    /* Buttons maintain good size */
+    .btn {
+        padding: 14px 25px;
+        font-size: 16px;
     }
 }
