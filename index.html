@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eatery at Flamingo | Bar Lounge & Car Wash</title>
+    <meta name="description" content="Experience the perfect blend of casual dining, premium bar lounge, and luxury car care at Eatery at Flamingo. Great food, signature cocktails, and vibrant atmosphere.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <!-- Image Viewer -->
+    <div class="image-viewer" id="imageViewer">
+        <div class="image-viewer-content">
+            <img id="viewerImage" src="" alt="">
+            <button class="image-viewer-close" id="closeViewer">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="image-viewer-nav image-viewer-prev" id="prevImage">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="image-viewer-nav image-viewer-next" id="nextImage">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="image-viewer-counter" id="imageCounter"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">EATERY</div>
+                <img src="images/logo.JPG" alt="Flamingo at Eatery Logo" class="logo-image">
+                <div class="logo-text"><span>FLAMINGO</span></div>
+            </a>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="menu.html" class="nav-link">Menu</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+        <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>
+                    <span>FLAMINGO</span>
+                    <span>AT EATERY</span>
+                </h1>
+                <p>Experience the perfect blend of casual dining, premium bar lounge, and luxury car care. Enjoy great food, signature cocktails, and vibrant atmosphere while we pamper your vehicle.</p>
+                
+                <div class="hero-cta">
+                    <button class="booking-toggle" id="bookingToggle">
+                        BOOK TABLE <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Booking Form -->
+            <div class="booking-form" id="bookingForm">
+                <h2>RESERVE YOUR TABLE</h2>
+                <form id="bookingFormElement">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Your Phone" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Date *</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time *</label>
+                            <select id="time" class="form-control" required>
+                                <option value="">Select Time</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="18:30">6:30 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="19:30">7:30 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                                <option value="20:30">8:30 PM</option>
+                                <option value="21:00">9:00 PM</option>
+                                <option value="21:30">9:30 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Number of Guests *</label>
+                        <select id="guests" class="form-control" required>
+                            <option value="">Select Guests</option>
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                            <option value="6">6 People</option>
+                            <option value="7">7+ People</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">BOOK TABLE</button>
+                    <a href="https://wa.me/27621369848?text=Hi%20Flamingo%20at%20Eatery%2C%20I%20would%20like%20to%20make%20a%20reservation" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                    </a>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" id="scrollIndicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">OUR <span>PREMIUM</span> SERVICES</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <h3>Casual Dining</h3>
+                    <p>Enjoy delicious food in a relaxed atmosphere with our carefully crafted menu featuring crowd favorites and local flavors.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wine-glass-alt"></i>
+                    </div>
+                    <h3>Premium Bar Lounge</h3>
+                    <p>Relax in our sophisticated lounge with handcrafted cocktails, fine wines, and premium spirits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Luxury Car Wash</h3>
+                    <p>While you dine and relax, let us pamper your vehicle with our premium car care services.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Live Entertainment</h3>
+                    <p>Enjoy curated music performances and special events in our vibrant atmosphere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>EATERY AT FLAMINGO</h3>
+                    <p>Where casual dining meets premium bar lounge and luxury car care. Experience the perfect blend of great food, drinks, and entertainment.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/27621369848" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>QUICK LINKS</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>INFORMATION</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>CONTACT US</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Flamingo Avenue, Kagiso 1754</li>
+                        <li><i class="fas fa-phone"></i> +27 62 136 9848</li>
+                        <li><i class="fas fa-envelope"></i> flamingolifestylerestaurant@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Open Daily: 12PM - Till Late</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EATERY AT FLAMINGO. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

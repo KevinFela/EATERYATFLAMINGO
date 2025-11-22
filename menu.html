@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Eatery at Flamingo</title>
+    <meta name="description" content="Explore our delicious menu featuring gourmet food, handcrafted cocktails, premium spirits, and fine wines at Eatery at Flamingo.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+    <!-- Image Viewer -->
+    <div class="image-viewer" id="imageViewer">
+        <div class="image-viewer-content">
+            <img id="viewerImage" src="" alt="">
+            <button class="image-viewer-close" id="closeViewer">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="image-viewer-nav image-viewer-prev" id="prevImage">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="image-viewer-nav image-viewer-next" id="nextImage">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="image-viewer-counter" id="imageCounter"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">EATERY</div>
+                <img src="images/logo.jpg" alt="Flamingo at Eatery Logo" class="logo-image">
+                <div class="logo-text"><span>FLAMINGO</span></div>
+            </a>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="menu.html" class="nav-link active">Menu</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <div class="container">
+            <h2 class="section-title">OUR <span>FOOD & DRINKS</span></h2>
+            
+            <!-- Menu Highlights -->
+            <div class="menu-highlights">
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h4>Fresh Ingredients</h4>
+                    <p>Locally sourced, always fresh</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-cocktail"></i>
+                    </div>
+                    <h4>Signature Cocktails</h4>
+                    <p>Handcrafted with passion</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h4>Wood-Fired Grill</h4>
+                    <p>Authentic flame-grilled taste</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4>Vegetarian Options</h4>
+                    <p>Delicious plant-based choices</p>
+                </div>
+            </div>
+            
+            <div class="menu-view-toggle">
+                <button class="view-btn active" data-view="text">
+                    <i class="fas fa-list"></i> Text Menu
+                </button>
+                <button class="view-btn" data-view="images">
+                    <i class="fas fa-images"></i> View Images
+                </button>
+            </div>
+            
+            <div class="menu-tabs">
+                <button class="menu-tab-btn active" data-tab="food">Food Menu</button>
+                <button class="menu-tab-btn" data-tab="alcohol">Alcohol Specials</button>
+                <button class="menu-tab-btn" data-tab="beers">Beers & Ciders</button>
+                <button class="menu-tab-btn" data-tab="spirits">Premium Spirits</button>
+            </div>
+            
+            <!-- Food Menu -->
+            <div class="menu-tab-content active" id="food">
+                <!-- Image Viewer -->
+                <div class="menu-viewer" id="foodViewer">
+                    <div class="menu-categories">
+                        <button class="category-btn active" data-category="all">All Pages</button>
+                        <button class="category-btn" data-category="starters">Starters</button>
+                        <button class="category-btn" data-category="mains">Main Courses</button>
+                        <button class="category-btn" data-category="desserts">Desserts</button>
+                    </div>
+                    
+                    <div class="menu-container">
+                        <div class="menu-loading">
+                            <div class="loading-spinner"></div>
+                            Loading menu...
+                        </div>
+                    </div>
+                    
+                    <div class="menu-navigation">
+                        <button class="nav-btn prev-btn" id="prevPage">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="page-indicator">
+                            <span>Page</span>
+                            <div class="page-numbers">
+                                <span class="current-page">1</span>
+                                <span>of</span>
+                                <span class="total-pages">5</span>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn next-btn" id="nextPage">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="menu-thumbnails">
+                        <!-- Thumbnails will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="menu-actions">
+                        <button class="action-btn" id="zoomIn">
+                            <i class="fas fa-search-plus"></i> Zoom In
+                        </button>
+                        <button class="action-btn" id="zoomOut">
+                            <i class="fas fa-search-minus"></i> Zoom Out
+                        </button>
+                        <button class="action-btn" id="downloadMenu">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Text Menu -->
+                <div class="text-menu active" id="foodTextMenu">
+                    <!-- STARTERS -->
+                    <div class="menu-category">
+                        <h3>STARTERS</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Babalas Chicken Livers</div>
+                                    <div class="menu-item-price">R65</div>
+                                </div>
+                                <div class="menu-item-description">Creamy chicken livers, served with toasted garlic bruchetta</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Chicken Caesar Salad</div>
+                                    <div class="menu-item-price">R140</div>
+                                </div>
+                                <div class="menu-item-description">Grilled chicken bits with leafy greens, croutons, an egg and topped with caesar dressing</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Greekish Salad</div>
+                                    <div class="menu-item-price">R55</div>
+                                </div>
+                                <div class="menu-item-description">Original Greek salad with a bit of a twist</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Greek Kofta</div>
+                                    <div class="menu-item-price">R77</div>
+                                </div>
+                                <div class="menu-item-description">200g grilled beef mince on skewers with BBQ pepper sauce</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Salad of the Day</div>
+                                    <div class="menu-item-price">R50</div>
+                                </div>
+                                <div class="menu-item-description">Ask your chef for what is available for the day</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SMALL PLATES -->
+                    <div class="menu-category">
+                        <h3>SMALL PLATES</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <span class="menu-item-badge menu-item-popular">Popular</span>
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Loaded Fries</div>
+                                    <div class="menu-item-price">R80</div>
+                                </div>
+                                <div class="menu-item-description">Potato chips loaded with melted cheese and fresh jalapeños topped with a creamy chip sauce</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Flamingo Chicken Wings & Fries</div>
+                                    <div class="menu-item-price">R129</div>
+                                </div>
+                                <div class="menu-item-description">4 wings, potato chips and a side salad. Peri-Peri / BBQ</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Grilled Chicken Fillet</div>
+                                    <div class="menu-item-price">R90</div>
+                                </div>
+                                <div class="menu-item-description">Succulent chicken breast served on a bed of rocket salad</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Rib & Wing Combo</div>
+                                    <div class="menu-item-price">R290</div>
+                                </div>
+                                <div class="menu-item-description">500g ribs, 4 wings and a side salad with chips</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Flamingo Chicken Wrap</div>
+                                    <div class="menu-item-price">R90</div>
+                                </div>
+                                <div class="menu-item-description">Hand rolled tortilla, filled with crumbed chicken strips, red onions, carrots, cucumber & our signature sauce</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Flamingo Beef Wrap</div>
+                                    <div class="menu-item-price">R105</div>
+                                </div>
+                                <div class="menu-item-description">Hand rolled tortilla, filled with thinly sliced beef strips, red onions, carrots, cucumber & our signature sauce</div>
+                            </div>
+                            <div class="menu-item">
+                                <span class="menu-item-badge menu-item-new">New</span>
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Philly Cheese Steak Sandwich</div>
+                                    <div class="menu-item-price">R105</div>
+                                </div>
+                                <div class="menu-item-description">Thinly sliced, grilled steak and melted cheese with peppers and sweet onion</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SIGNATURE MAINS -->
+                    <div class="menu-category">
+                        <h3>SIGNATURE MAINS</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">300g Sirloin Steak</div>
+                                    <div class="menu-item-price">R280</div>
+                                </div>
+                                <div class="menu-item-description">Served with potato cut chips & salad / roasted baby potatoes and veggie greens</div>
+                            </div>
+                            <div class="menu-item">
+                                <span class="menu-item-badge menu-item-spicy">Spicy</span>
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Pollo Pasta</div>
+                                    <div class="menu-item-price">R180</div>
+                                </div>
+                                <div class="menu-item-description">Creamy chicken & spinach pasta topped with Parmesan shavings</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Pork Belly</div>
+                                    <div class="menu-item-price">R245</div>
+                                </div>
+                                <div class="menu-item-description">Crispy Asian pork belly served with potato cut chips & a Dijon slaw</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Flamingo Ribs</div>
+                                    <div class="menu-item-price">R300</div>
+                                </div>
+                                <div class="menu-item-description">Served with potatoes cut chips and a side salad</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Original Cheese Burger</div>
+                                    <div class="menu-item-price">R190</div>
+                                </div>
+                                <div class="menu-item-description">120g in-house beef patty served with potatoes cut chips</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FROM THE GRILL -->
+                    <div class="menu-category">
+                        <h3>FROM THE GRILL</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Woodfired Chicken</div>
+                                    <div class="menu-item-price">R115 | R174 | R280</div>
+                                </div>
+                                <div class="menu-item-description">Available in ¼, ½ or full chicken</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Traditional South African Wors</div>
+                                    <div class="menu-item-price">R200</div>
+                                </div>
+                                <div class="menu-item-description">A juicy South African original boerewors served with pap, tomato gravy & a side</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Chuck & Wors</div>
+                                    <div class="menu-item-price">R200</div>
+                                </div>
+                                <div class="menu-item-description">200g chuck and beef wors served with a side and salad</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Pork Chops</div>
+                                    <div class="menu-item-price">R160</div>
+                                </div>
+                                <div class="menu-item-description">Fire grilled pork chops served with two sides</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PIZZA -->
+                    <div class="menu-category">
+                        <h3>PIZZA (L = Large | S = Small)</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Classic Margarita</div>
+                                    <div class="menu-item-price">R110 | R90</div>
+                                </div>
+                                <div class="menu-item-description">Tomato, mozzarella & basil</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Firey Flamingo</div>
+                                    <div class="menu-item-price">R145 | R120</div>
+                                </div>
+                                <div class="menu-item-description">Tomatoes, chicken & peri peri</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">BBQ Chicken</div>
+                                    <div class="menu-item-price">R145 | R120</div>
+                                </div>
+                                <div class="menu-item-description">Chicken, peppers & BBQ sauce</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Hawaiian</div>
+                                    <div class="menu-item-price">R125 | R95</div>
+                                </div>
+                                <div class="menu-item-description">Ham & pineapple</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Chimichurri & Beef</div>
+                                    <div class="menu-item-price">R165 | R125</div>
+                                </div>
+                                <div class="menu-item-description">Beef, chimichurri & rocket</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Mexicano</div>
+                                    <div class="menu-item-price">R165 | R135</div>
+                                </div>
+                                <div class="menu-item-description">Mince, jalapeños, peppers & cherry tomatoes</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Regina</div>
+                                    <div class="menu-item-price">R140 | R110</div>
+                                </div>
+                                <div class="menu-item-description">Ham & mushroom</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Cali</div>
+                                    <div class="menu-item-price">R185 | R125</div>
+                                </div>
+                                <div class="menu-item-description">Bacon, avocado & feta cheese</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TRADITIONAL MEALS -->
+                    <div class="menu-category">
+                        <h3>TRADITIONAL MEALS (available on Mondays)</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Mogodu</div>
+                                    <div class="menu-item-price">R75</div>
+                                </div>
+                                <div class="menu-item-description">Served with pap/creamy samp with two sides</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Nama Ya Tlhogo</div>
+                                    <div class="menu-item-price">R90</div>
+                                </div>
+                                <div class="menu-item-description">Served with pap/creamy samp with two sides</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Pork Trotters</div>
+                                    <div class="menu-item-price">R80</div>
+                                </div>
+                                <div class="menu-item-description">Served with pap/creamy samp with two sides</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Chicken Feet & Gizzard</div>
+                                    <div class="menu-item-price">R60</div>
+                                </div>
+                                <div class="menu-item-description">Served with pap/creamy samp with two sides</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Traditional Combo</div>
+                                    <div class="menu-item-price">R140</div>
+                                </div>
+                                <div class="menu-item-description">Nama ya tlhogo and mogodu served with pap/creamy samp with two sides</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Traditional Combo 2</div>
+                                    <div class="menu-item-price">R165</div>
+                                </div>
+                                <div class="menu-item-description">Nama ya tlhogo and mogodu and pork trotters served with pap/creamy samp with two sides</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Traditional Combo 3</div>
+                                    <div class="menu-item-price">R150</div>
+                                </div>
+                                <div class="menu-item-description">Nama ya tlhogo and mogodu and chicken feet and gizzards served with pap/creamy samp with two sides</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STREET FOODS -->
+                    <div class="menu-category">
+                        <h3>STREET FOODS</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Kota Ya Mince</div>
+                                    <div class="menu-item-price">R35</div>
+                                </div>
+                                <div class="menu-item-description">Soft mash with mince on kota bread</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Wors Roll</div>
+                                    <div class="menu-item-price">R75</div>
+                                </div>
+                                <div class="menu-item-description">Mayo base with beef sausage, grilled peppers and melted cheese</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Original Kota</div>
+                                    <div class="menu-item-price">R45</div>
+                                </div>
+                                <div class="menu-item-description">Polony, atchaar, lettuce, cheese in with sauce</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FOOD PLATTERS -->
+                    <div class="menu-category">
+                        <h3>FOOD PLATTERS</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Street Food Platter</div>
+                                    <div class="menu-item-price">R808</div>
+                                </div>
+                                <div class="menu-item-description">4 gourmet sliders, ribs, wings, loaded fries and a side salad</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Shisanyama Platter for 2</div>
+                                    <div class="menu-item-price">R325</div>
+                                </div>
+                                <div class="menu-item-description">Riblets, winglets, beef skewers, chips & salad</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Shisanyama Platter for 4</div>
+                                    <div class="menu-item-price">R775</div>
+                                </div>
+                                <div class="menu-item-description">Riblets, winglets, beef skewers, spiral wors skewers, chips & salad</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Shisanyama Platter for 8</div>
+                                    <div class="menu-item-price">R1452</div>
+                                </div>
+                                <div class="menu-item-description">Riblets, winglets, beef skewers, chicken skewer, spiral wors skewers, chips & salad</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SIDES -->
+                    <div class="menu-category">
+                        <h3>SIDES</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Chakalaka</div>
+                                    <div class="menu-item-price">R35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Creamed Spinach</div>
+                                    <div class="menu-item-price">R35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Salsa</div>
+                                    <div class="menu-item-price">R20</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">500g Potato Cut Chips</div>
+                                    <div class="menu-item-price">R45</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Alcohol Specials -->
+            <div class="menu-tab-content" id="alcohol">
+                <div class="text-menu active" id="alcoholTextMenu">
+                    <!-- COCKTAILS -->
+                    <div class="menu-category">
+                        <h3>COCKTAILS</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Cosmopolitan</div>
+                                    <div class="menu-item-price">R80</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Long Island Ice Tea</div>
+                                    <div class="menu-item-price">R100</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Sex on the Beach</div>
+                                    <div class="menu-item-price">R85</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Strawberry Daiquiri</div>
+                                    <div class="menu-item-price">R85</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Pina Colada</div>
+                                    <div class="menu-item-price">R85</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <span class="menu-item-badge menu-item-popular">Popular</span>
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Mojito</div>
+                                    <div class="menu-item-price">R75</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Whiskey Sour</div>
+                                    <div class="menu-item-price">R110</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Coconut Margarita</div>
+                                    <div class="menu-item-price">R90</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">French 75</div>
+                                    <div class="menu-item-price">R120</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Flamingo Fizz</div>
+                                    <div class="menu-item-price">R90</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Tequila Sunrise</div>
+                                    <div class="menu-item-price">R85</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">California</div>
+                                    <div class="menu-item-price">R85</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Passion Fruit and Lemonade</div>
+                                    <div class="menu-item-price">R85</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Classic Margarita</div>
+                                    <div class="menu-item-price">R110</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Strawberry Twist</div>
+                                    <div class="menu-item-price">R85</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Berry Butterfly</div>
+                                    <div class="menu-item-price">R85</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Tropical Heatwave</div>
+                                    <div class="menu-item-price">R85</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Flamingo Spark</div>
+                                    <div class="menu-item-price">R105</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Henriet</div>
+                                    <div class="menu-item-price">R110</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Paloma</div>
+                                    <div class="menu-item-price">R80</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">New York Sour</div>
+                                    <div class="menu-item-price">R110</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Mimosa</div>
+                                    <div class="menu-item-price">R65</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Berry Bliss Mocktail</div>
+                                    <div class="menu-item-price">R70</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SHOOTERS -->
+                    <div class="menu-category">
+                        <h3>SHOOTERS</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Gordons</div>
+                                    <div class="menu-item-price">R25</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Smirnoff</div>
+                                    <div class="menu-item-price">R25</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Amarula</div>
+                                    <div class="menu-item-price">R30</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Jagermeister</div>
+                                    <div class="menu-item-price">R30</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Omega Silver & Gold</div>
+                                    <div class="menu-item-price">R30</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Blowjob</div>
+                                    <div class="menu-item-price">R45</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Springbok</div>
+                                    <div class="menu-item-price">R45</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Jagerbomb</div>
+                                    <div class="menu-item-price">R40</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Jameson Triple Distilled</div>
+                                    <div class="menu-item-price">R30</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Jameson Select</div>
+                                    <div class="menu-item-price">R40</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Hennessy VS</div>
+                                    <div class="menu-item-price">R40</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Hennessy VSOP</div>
+                                    <div class="menu-item-price">R80</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beers & Ciders -->
+            <div class="menu-tab-content" id="beers">
+                <div class="text-menu active" id="beersTextMenu">
+                    <div class="menu-category">
+                        <h3>BEERS & CIDERS</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Corona</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Castle Lite</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Windhoek Lager</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Heineken</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Windhoek Draught</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Black Label</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Stella Artois</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Castle Lager</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Flying Fish</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Heineken Zero</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Sol</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Heineken Silver</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Savanna</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Savanna Angry Lemon</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Savanna Zero</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Belgravia Dry Lemon</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Belgravia Gin & Tonic</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Bernini Blush</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Bernini Classic</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Strongbow Redberries</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Strongbow Gold Apple</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Hunters Extreme</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Brutal Fruit Ruby Apple</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Brutal Fruit</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Ice Tropez</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Ice Tropez Exotic</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Chateau Deli Sweet White/Red</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Red Square range</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Hunters Dry/Gold</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Black Crown</div>
+                                    <div class="menu-item-price">R30-35</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Premium Spirits -->
+            <div class="menu-tab-content" id="spirits">
+                <div class="text-menu active" id="spiritsTextMenu">
+                    <!-- CHAMPAGNE -->
+                    <div class="menu-category">
+                        <h3>CHAMPAGNE</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Armand de Brignac Gold (Ace of Spades)</div>
+                                    <div class="menu-item-price">R10000</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Dom Perignon</div>
+                                    <div class="menu-item-price">R8500</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Veuve Rich</div>
+                                    <div class="menu-item-price">R2500</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Veuve Clicquot</div>
+                                    <div class="menu-item-price">R1850</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Moet & Chandon Nectar/Brut/Pharell</div>
+                                    <div class="menu-item-price">R1800 each</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Mumm</div>
+                                    <div class="menu-item-price">R1500</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Krone</div>
+                                    <div class="menu-item-price">R500</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Pongracz</div>
+                                    <div class="menu-item-price">R450</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Simonsig</div>
+                                    <div class="menu-item-price">R400</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PREMIUM SPIRITS -->
+                    <div class="menu-category">
+                        <h3>PREMIUM SPIRITS</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Amarula</div>
+                                    <div class="menu-item-price">R350</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Gordons</div>
+                                    <div class="menu-item-price">R450</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Jagermeister</div>
+                                    <div class="menu-item-price">R700</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Tanqueray</div>
+                                    <div class="menu-item-price">R700</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Jameson Triple Distilled</div>
+                                    <div class="menu-item-price">R780</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Johnny Walker Blonde</div>
+                                    <div class="menu-item-price">R750</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Johnny Walker Black</div>
+                                    <div class="menu-item-price">R800</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Remy Martin VS</div>
+                                    <div class="menu-item-price">R1250</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Remy Martin VSOP</div>
+                                    <div class="menu-item-price">R1900</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Hennessy VS</div>
+                                    <div class="menu-item-price">R1250</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Jameson Select Reserve</div>
+                                    <div class="menu-item-price">R1050</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Glenfiddich 15yrs</div>
+                                    <div class="menu-item-price">R2050</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Glenlivet 12yrs</div>
+                                    <div class="menu-item-price">R1300</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Hendricks</div>
+                                    <div class="menu-item-price">R1050</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Johnny Walker Gold</div>
+                                    <div class="menu-item-price">R1400</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Glenfiddich 12yrs</div>
+                                    <div class="menu-item-price">R1250</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Remy Martin 1738</div>
+                                    <div class="menu-item-price">R2800</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Glenlivet 15yrs</div>
+                                    <div class="menu-item-price">R2200</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Glenlivet Founders Reserve</div>
+                                    <div class="menu-item-price">R1050</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Hennessy XO</div>
+                                    <div class="menu-item-price">R5800</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Johnny Walker Blue Label</div>
+                                    <div class="menu-item-price">R5050</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Glenfiddich 18yrs</div>
+                                    <div class="menu-item-price">R3700</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Amber Inverroche</div>
+                                    <div class="menu-item-price">R1050</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Hennessy VSOP</div>
+                                    <div class="menu-item-price">R1900</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Don Julio Reposado</div>
+                                    <div class="menu-item-price">R2300</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Don Julio Blanco</div>
+                                    <div class="menu-item-price">R2200</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Don Julio 1942</div>
+                                    <div class="menu-item-price">R9000</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Azul Reposado</div>
+                                    <div class="menu-item-price">R6100</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WINES -->
+                    <div class="menu-category">
+                        <h3>WINES (by the bottle)</h3>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Rupert and Rothchild</div>
+                                    <div class="menu-item-price">R450</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Spier</div>
+                                    <div class="menu-item-price">R250</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Nederburg (Shiraz)</div>
+                                    <div class="menu-item-price">R250</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Nederburg (Pinotage)</div>
+                                    <div class="menu-item-price">R250</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <div class="menu-item-name">Protea Chenin</div>
+                                    <div class="menu-item-price">R200</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>EATERY AT FLAMINGO</h3>
+                    <p>Where casual dining meets premium bar lounge and luxury car care. Experience the perfect blend of great food, drinks, and entertainment.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/27621369848" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>QUICK LINKS</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>INFORMATION</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>CONTACT US</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Flamingo Avenue, Kagiso 1754</li>
+                        <li><i class="fas fa-phone"></i> +27 62 136 9848</li>
+                        <li><i class="fas fa-envelope"></i> flamingolifestylerestaurant@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Open Daily: 12PM - Till Late</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EATERY AT FLAMINGO. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>
