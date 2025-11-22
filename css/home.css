@@ -1,11 +1,6 @@
 /* Hero Section */
 .hero {
     min-height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('../images/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,6 +8,22 @@
     position: relative;
     color: white;
     text-align: center;
+    overflow: hidden; /* Prevent overflow issues */
+    width: 100%;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('../images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -1;
 }
 
 .hero::before {
@@ -343,7 +354,7 @@
     font-size: 1rem;
 }
 
-/* Media Queries */
+/* Media Queries - FIXED HERO SECTION FOR MOBILE */
 @media (max-width: 1200px) {
     .hero h1 {
         font-size: 4rem;
@@ -373,13 +384,16 @@
         flex-direction: column;
         gap: 0;
     }
+    
+    .hero-background {
+        background-attachment: scroll; /* Fix mobile parallax issues */
+    }
 }
 
 @media (max-width: 768px) {
     .hero {
         padding: 100px 0 40px;
         min-height: 80vh;
-        background-attachment: scroll;
     }
 
     .hero h1 {
@@ -403,10 +417,21 @@
     
     .booking-form {
         padding: 25px;
+        margin: 0 15px; /* Add margin for better spacing */
+    }
+    
+    .hero-background {
+        background-size: cover;
+        background-position: center;
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
+    .hero {
+        padding: 90px 0 30px;
+    }
+    
     .hero h1 {
         font-size: 2.2rem;
         gap: 10px;
@@ -427,10 +452,15 @@
     .feature-card {
         padding: 30px 20px;
     }
+    
+    .hero-background {
+        background-size: cover;
+        background-position: center;
+    }
 }
 
 /* Hero Image Fallback */
-.no-hero-image .hero {
+.no-hero-image .hero-background {
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-pink-dark));
 }
 
@@ -439,7 +469,7 @@
 }
 
 /* Loading state for hero image */
-.hero.loading {
+.hero.loading .hero-background {
     background: linear-gradient(135deg, #f8f9fa, #e9ecef);
 }
 
