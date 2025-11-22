@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Parallax effect for hero
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
-        const parallax = document.querySelector('.hero');
+        const parallax = document.querySelector('.hero-background');
         if (parallax && window.innerWidth > 768) {
             const rate = scrolled * 0.5;
             parallax.style.transform = `translateY(${rate}px)`;
@@ -228,17 +228,6 @@ document.addEventListener('DOMContentLoaded', function() {
         footerObserver.observe(footer);
     }
 
-    // Enhanced mobile menu animation
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mainNav = document.getElementById('mainNav');
-    
-    if (mobileMenu && mainNav) {
-        mobileMenu.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-    }
-
     // Add loading class initially
     hero.classList.add('loading');
 });
@@ -299,83 +288,3 @@ function initAnimations() {
 
     console.log('Enhanced animations initialized');
 }
-
-// Notification function
-function showNotification(message, type) {
-    // Remove existing notifications
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
-            <span>${message}</span>
-        </div>
-    `;
-    
-    // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : '#f44336'};
-        color: white;
-        padding: 15px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        z-index: 10000;
-        max-width: 400px;
-        animation: slideInRight 0.5s ease, slideOutRight 0.5s ease 2.5s forwards;
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Remove notification after animation
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-        }
-    }, 3000);
-}
-
-// Enhanced image viewer functionality
-function initImageViewer() {
-    const imageViewer = document.getElementById('imageViewer');
-    const viewerImage = document.getElementById('viewerImage');
-    const closeViewer = document.getElementById('closeViewer');
-    const prevImage = document.getElementById('prevImage');
-    const nextImage = document.getElementById('nextImage');
-    const imageCounter = document.getElementById('imageCounter');
-    
-    if (imageViewer && viewerImage) {
-        // Close viewer
-        closeViewer.addEventListener('click', function() {
-            imageViewer.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Close on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && imageViewer.classList.contains('active')) {
-                imageViewer.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Close on background click
-        imageViewer.addEventListener('click', function(e) {
-            if (e.target === imageViewer) {
-                imageViewer.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-    }
-}
-
-// Initialize image viewer when DOM is loaded
-document.addEventListener('DOMContentLoaded', initImageViewer);
