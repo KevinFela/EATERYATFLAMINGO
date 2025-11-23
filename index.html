@@ -10,23 +10,6 @@
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-    <!-- Image Viewer -->
-    <div class="image-viewer" id="imageViewer">
-        <div class="image-viewer-content">
-            <img id="viewerImage" src="" alt="">
-            <button class="image-viewer-close" id="closeViewer">
-                <i class="fas fa-times"></i>
-            </button>
-            <button class="image-viewer-nav image-viewer-prev" id="prevImage">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="image-viewer-nav image-viewer-next" id="nextImage">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="image-viewer-counter" id="imageCounter"></div>
-        </div>
-    </div>
-
     <!-- Header -->
     <header>
         <div class="container header-container">
@@ -36,6 +19,9 @@
                 <div class="logo-text"><span>FLAMINGO</span></div>
             </a>
             <nav id="mainNav">
+                <div class="nav-close" id="navClose">
+                    <i class="fas fa-times"></i>
+                </div>
                 <ul>
                     <li><a href="index.html" class="nav-link active">Home</a></li>
                     <li><a href="menu.html" class="nav-link">Menu</a></li>

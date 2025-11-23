@@ -1,30 +1,43 @@
 // Main JavaScript functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu functionality
+    // Mobile menu functionality with slide from right
     const mobileMenu = document.getElementById('mobileMenu');
     const mainNav = document.getElementById('mainNav');
+    const navClose = document.getElementById('navClose');
+    const body = document.body;
     
     if (mobileMenu && mainNav) {
         mobileMenu.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
+            mainNav.classList.add('active');
+            body.style.overflow = 'hidden'; // Prevent background scroll
+            mobileMenu.classList.add('active');
             
-            // Toggle between hamburger and X icon
+            // Change to X icon
             const menuIcon = mobileMenu.querySelector('i');
-            if (mainNav.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-            } else {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+        });
+        
+        // Close navigation when X is clicked
+        if (navClose) {
+            navClose.addEventListener('click', function() {
+                mainNav.classList.remove('active');
+                body.style.overflow = 'auto'; // Restore scroll
+                mobileMenu.classList.remove('active');
+                
+                // Change back to hamburger icon
+                const menuIcon = mobileMenu.querySelector('i');
                 menuIcon.classList.remove('fa-times');
                 menuIcon.classList.add('fa-bars');
-            }
-        });
+            });
+        }
         
         // Close mobile menu when clicking on a link
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
                 mainNav.classList.remove('active');
+                body.style.overflow = 'auto';
                 mobileMenu.classList.remove('active');
                 
                 // Reset to hamburger icon
@@ -34,10 +47,25 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!mainNav.contains(e.target) && !mobileMenu.contains(e.target)) {
+        // Close mobile menu when clicking outside (on overlay)
+        mainNav.addEventListener('click', function(e) {
+            if (e.target === mainNav) {
                 mainNav.classList.remove('active');
+                body.style.overflow = 'auto';
+                mobileMenu.classList.remove('active');
+                
+                // Reset to hamburger icon
+                const menuIcon = mobileMenu.querySelector('i');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                body.style.overflow = 'auto';
                 mobileMenu.classList.remove('active');
                 
                 // Reset to hamburger icon
@@ -48,43 +76,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Image viewer functionality
-    initImageViewer();
-});
+    // Add scroll effect to header
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        const scrolled = window.pageYOffset;
+        
+        if (header) {
+            if (scrolled > 100) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+                header.style.boxShadow = '0 2px 20px var(--shadow-light)';
+            } else {
+                header.style.backgroundColor = 'transparent';
+                header.style.backdropFilter = 'none';
+                header.style.boxShadow = 'none';
+            }
+        }
+    });
 
-// Enhanced image viewer functionality
-function initImageViewer() {
-    const imageViewer = document.getElementById('imageViewer');
-    const viewerImage = document.getElementById('viewerImage');
-    const closeViewer = document.getElementById('closeViewer');
-    const prevImage = document.getElementById('prevImage');
-    const nextImage = document.getElementById('nextImage');
-    const imageCounter = document.getElementById('imageCounter');
-    
-    if (imageViewer && viewerImage) {
-        // Close viewer
-        closeViewer.addEventListener('click', function() {
-            imageViewer.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Close on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && imageViewer.classList.contains('active')) {
-                imageViewer.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Close on background click
-        imageViewer.addEventListener('click', function(e) {
-            if (e.target === imageViewer) {
-                imageViewer.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
+    // Initialize header on load
+    const header = document.querySelector('header');
+    if (header && window.pageYOffset > 100) {
+        header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+        header.style.backdropFilter = 'blur(10px)';
+        header.style.boxShadow = '0 2px 20px var(--shadow-light)';
     }
-}
+});
 
 // Notification function
 function showNotification(message, type) {
@@ -107,16 +124,18 @@ function showNotification(message, type) {
     // Add styles
     notification.style.cssText = `
         position: fixed;
-        top: 20px;
-        right: 20px;
+        top: 30px;
+        right: 30px;
         background: ${type === 'success' ? '#4CAF50' : '#f44336'};
         color: white;
-        padding: 15px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        padding: 18px 25px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         z-index: 10000;
-        max-width: 400px;
-        animation: slideInRight 0.5s ease, slideOutRight 0.5s ease 2.5s forwards;
+        max-width: 450px;
+        animation: slideInRight 0.6s ease, slideOutRight 0.6s ease 2.5s forwards;
+        font-weight: 600;
+        font-size: 15px;
     `;
     
     document.body.appendChild(notification);

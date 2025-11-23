@@ -238,7 +238,7 @@ function initAnimations() {
     const buttons = document.querySelectorAll('.btn, .booking-toggle');
     buttons.forEach(button => {
         button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px) scale(1.02)';
+            this.style.transform = 'translateY(-3px) scale(1.03)';
         });
         
         button.addEventListener('mouseleave', function() {
@@ -264,7 +264,7 @@ function initAnimations() {
     const socialLinks = document.querySelectorAll('.social-links a');
     socialLinks.forEach(link => {
         link.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px) rotate(5deg)';
+            this.style.transform = 'translateY(-6px) rotate(5deg)';
         });
         
         link.addEventListener('mouseleave', function() {
