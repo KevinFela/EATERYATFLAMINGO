@@ -1,27 +1,26 @@
-/* Services Section */
+/* services.css - Updated for Consistency */
 .services-section {
-    padding: 120px 0 60px;
+    padding: calc(var(--header-height) + var(--space-xl)) 0 var(--space-xxl);
     background-color: var(--secondary-light);
 }
 
-/* Services Tabs */
 .services-tabs {
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: var(--space-xl);
     border-bottom: 1px solid var(--border-color);
     flex-wrap: wrap;
 }
 
 .services-tab-btn {
-    padding: 12px 25px;
+    padding: 14px 28px;
     background: none;
     border: none;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: var(--font-weight-medium);
     color: var(--text-secondary);
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-normal);
     position: relative;
 }
 
@@ -47,56 +46,55 @@
     display: block;
 }
 
-/* Car Wash Services */
 .car-wash-services {
-    margin-top: 50px;
+    margin-top: var(--space-xxl);
 }
 
 .service-packages {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
 }
 
 .service-package {
     background-color: var(--primary-light);
-    padding: 30px;
-    border-radius: 10px;
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
     text-align: center;
-    box-shadow: 0 5px 15px var(--shadow-light);
-    transition: var(--transition);
+    box-shadow: 0 8px 25px var(--shadow-light);
+    transition: var(--transition-normal);
     border: 1px solid var(--border-color);
 }
 
 .service-package:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px var(--shadow-light);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px var(--shadow-medium);
     border-color: var(--accent-pink);
 }
 
 .service-package h3 {
-    margin-bottom: 15px;
+    margin-bottom: var(--space-md);
     color: var(--text-primary);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
 }
 
 .service-package .price {
     font-size: 2rem;
     color: var(--accent-pink);
-    font-weight: 700;
-    margin: 20px 0;
+    font-weight: var(--font-weight-black);
+    margin: var(--space-md) 0;
 }
 
 .service-package ul {
     list-style: none;
     text-align: left;
-    margin-bottom: 25px;
+    margin-bottom: var(--space-lg);
 }
 
 .service-package ul li {
-    margin-bottom: 10px;
+    margin-bottom: var(--space-sm);
     color: var(--text-secondary);
     position: relative;
     padding-left: 25px;
@@ -110,19 +108,18 @@
     font-weight: bold;
 }
 
-/* Enhanced Media Grid for Car Wash */
 .car-wash-media-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
 }
 
 .car-wash-media-grid .media-item {
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: 0 5px 15px var(--shadow-light);
-    transition: var(--transition);
+    transition: var(--transition-normal);
     cursor: pointer;
 }
 
@@ -135,33 +132,32 @@
     width: 100%;
     height: 150px;
     object-fit: cover;
-    transition: var(--transition);
+    transition: var(--transition-normal);
 }
 
 .car-wash-media-grid .media-item:hover img {
     transform: scale(1.1);
 }
 
-/* Events Grid */
 .events-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
 }
 
 .event-card {
     background-color: var(--primary-light);
-    border-radius: 10px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 5px 15px var(--shadow-light);
-    transition: var(--transition);
+    box-shadow: 0 8px 25px var(--shadow-light);
+    transition: var(--transition-normal);
     border: 1px solid var(--border-color);
 }
 
 .event-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px var(--shadow-light);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px var(--shadow-medium);
     border-color: var(--accent-pink);
 }
 
@@ -174,7 +170,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: var(--transition);
+    transition: var(--transition-normal);
 }
 
 .event-card:hover .event-image img {
@@ -182,55 +178,54 @@
 }
 
 .event-content {
-    padding: 20px;
+    padding: var(--space-lg);
 }
 
 .event-date {
     display: inline-block;
     background-color: var(--accent-pink);
     color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
     font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-sm);
 }
 
 .event-title {
     font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-sm);
     color: var(--text-primary);
 }
 
 .event-description {
     color: var(--text-secondary);
-    margin-bottom: 15px;
+    margin-bottom: var(--space-md);
     line-height: 1.5;
 }
 
-/* Hubbly Menu */
 .hubbly-menu {
     background: var(--primary-light);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--shadow-light);
-    margin-top: 30px;
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 25px var(--shadow-light);
+    margin-top: var(--space-lg);
 }
 
 .hubbly-flavors {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
 }
 
 .hubbly-flavor {
     text-align: center;
-    padding: 20px;
+    padding: var(--space-lg);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    transition: var(--transition);
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
 }
 
 .hubbly-flavor:hover {
@@ -240,102 +235,101 @@
 
 .hubbly-flavor .price {
     color: var(--accent-pink);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
     font-size: 1.2rem;
-    margin-top: 10px;
+    margin-top: var(--space-sm);
 }
 
-/* Conference Features */
 .conference-features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin: 40px 0;
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
 }
 
 .conference-feature {
     text-align: center;
-    padding: 30px 20px;
+    padding: var(--space-xl) var(--space-lg);
     background: var(--primary-light);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--shadow-light);
-    transition: var(--transition);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 25px var(--shadow-light);
+    transition: var(--transition-normal);
 }
 
 .conference-feature:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px var(--shadow-light);
+    box-shadow: 0 12px 30px var(--shadow-medium);
 }
 
 .conference-feature i {
     font-size: 2.5rem;
     color: var(--accent-pink);
-    margin-bottom: 15px;
+    margin-bottom: var(--space-md);
 }
 
 .conference-feature h4 {
     font-size: 1.2rem;
-    margin-bottom: 10px;
+    margin-bottom: var(--space-sm);
     color: var(--text-primary);
+    font-weight: var(--font-weight-bold);
 }
 
-/* Catering Packages */
 .catering-packages {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
 }
 
 .catering-package {
     background: var(--primary-light);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--shadow-light);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 25px var(--shadow-light);
     text-align: center;
-    transition: var(--transition);
+    transition: var(--transition-normal);
 }
 
 .catering-package:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px var(--shadow-light);
+    box-shadow: 0 12px 30px var(--shadow-medium);
 }
 
 .catering-package .price {
     font-size: 1.5rem;
     color: var(--accent-pink);
-    font-weight: 700;
-    margin: 15px 0;
+    font-weight: var(--font-weight-bold);
+    margin: var(--space-md) 0;
 }
 
-/* ===== MOBILE OPTIMIZATIONS ===== */
+/* Mobile Optimizations for Services */
 @media (max-width: 768px) {
     .services-section {
-        padding: 90px 0 40px;
+        padding: calc(var(--header-height) + var(--space-lg)) 0 var(--space-xl);
     }
 
     .services-tabs {
         flex-direction: column;
         align-items: center;
-        gap: 10px;
-        margin-bottom: 30px;
+        gap: var(--space-xs);
+        margin-bottom: var(--space-lg);
     }
 
     .services-tab-btn {
         width: 100%;
         text-align: center;
-        padding: 12px 15px;
+        padding: 12px 16px;
         font-size: 14px;
     }
 
     .service-packages {
         grid-template-columns: 1fr;
-        gap: 20px;
-        margin-top: 30px;
+        gap: var(--space-md);
+        margin-top: var(--space-lg);
     }
 
     .service-package {
-        padding: 20px;
+        padding: var(--space-lg);
     }
 
     .service-package h3 {
@@ -348,16 +342,12 @@
 
     .content-container {
         flex-direction: column;
-        gap: 25px;
-    }
-
-    .content-text, .content-media {
-        min-width: 100%;
+        gap: var(--space-md);
     }
 
     .car-wash-media-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: var(--space-xs);
     }
 
     .car-wash-media-grid .media-item img {
@@ -366,12 +356,8 @@
 
     .events-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
-        margin-top: 30px;
-    }
-
-    .event-card {
-        margin-bottom: 0;
+        gap: var(--space-md);
+        margin-top: var(--space-lg);
     }
 
     .event-image {
@@ -379,7 +365,7 @@
     }
 
     .event-content {
-        padding: 15px;
+        padding: var(--space-md);
     }
 
     .event-title {
@@ -388,12 +374,12 @@
 
     .conference-features {
         grid-template-columns: 1fr;
-        gap: 20px;
-        margin: 30px 0;
+        gap: var(--space-md);
+        margin: var(--space-lg) 0;
     }
 
     .conference-feature {
-        padding: 25px 15px;
+        padding: var(--space-lg);
     }
 
     .conference-feature i {
@@ -402,106 +388,25 @@
 
     .catering-packages {
         grid-template-columns: 1fr;
-        gap: 20px;
-        margin-top: 30px;
+        gap: var(--space-md);
+        margin-top: var(--space-lg);
     }
 
     .catering-package {
-        padding: 25px 20px;
+        padding: var(--space-lg);
     }
 
     .hubbly-menu {
-        padding: 25px 20px;
-        margin-top: 25px;
+        padding: var(--space-lg);
+        margin-top: var(--space-md);
     }
 
     .hubbly-flavors {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: var(--space-sm);
     }
 
     .hubbly-flavor {
-        padding: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .services-section {
-        padding: 80px 0 30px;
-    }
-
-    .car-wash-media-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .service-package {
-        padding: 18px 15px;
-    }
-    
-    .service-package h3 {
-        font-size: 1.2rem;
-    }
-
-    .service-package .price {
-        font-size: 1.6rem;
-    }
-    
-    .catering-package {
-        padding: 20px 15px;
-    }
-
-    .event-image {
-        height: 160px;
-    }
-
-    .event-title {
-        font-size: 1.1rem;
-    }
-
-    .event-description {
-        font-size: 0.9rem;
-    }
-
-    .conference-feature {
-        padding: 20px 15px;
-    }
-
-    .conference-feature h4 {
-        font-size: 1.1rem;
-    }
-
-    .hubbly-flavor .price {
-        font-size: 1.1rem;
-    }
-}
-
-/* Large mobile devices */
-@media (max-width: 425px) and (min-width: 376px) {
-    .service-package {
-        padding: 20px;
-    }
-
-    .event-image {
-        height: 170px;
-    }
-}
-
-/* Small mobile devices */
-@media (max-width: 375px) {
-    .services-tab-btn {
-        padding: 10px 12px;
-        font-size: 13px;
-    }
-
-    .service-package {
-        padding: 15px 12px;
-    }
-
-    .service-package h3 {
-        font-size: 1.1rem;
-    }
-
-    .event-content {
-        padding: 12px;
+        padding: var(--space-md);
     }
 }

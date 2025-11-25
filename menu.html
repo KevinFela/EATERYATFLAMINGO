@@ -10,23 +10,6 @@
     <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
-    <!-- Image Viewer -->
-    <div class="image-viewer" id="imageViewer">
-        <div class="image-viewer-content">
-            <img id="viewerImage" src="" alt="">
-            <button class="image-viewer-close" id="closeViewer">
-                <i class="fas fa-times"></i>
-            </button>
-            <button class="image-viewer-nav image-viewer-prev" id="prevImage">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="image-viewer-nav image-viewer-next" id="nextImage">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="image-viewer-counter" id="imageCounter"></div>
-        </div>
-    </div>
-
     <!-- Header -->
     <header>
         <div class="container header-container">
@@ -36,6 +19,9 @@
                 <div class="logo-text"><span>FLAMINGO</span></div>
             </a>
             <nav id="mainNav">
+                <div class="nav-close" id="navClose">
+                    <i class="fas fa-times"></i>
+                </div>
                 <ul>
                     <li><a href="index.html" class="nav-link">Home</a></li>
                     <li><a href="menu.html" class="nav-link active">Menu</a></li>
@@ -87,15 +73,6 @@
                 </div>
             </div>
             
-            <div class="menu-view-toggle">
-                <button class="view-btn active" data-view="text">
-                    <i class="fas fa-list"></i> Text Menu
-                </button>
-                <button class="view-btn" data-view="images">
-                    <i class="fas fa-images"></i> View Images
-                </button>
-            </div>
-            
             <div class="menu-tabs">
                 <button class="menu-tab-btn active" data-tab="food">Food Menu</button>
                 <button class="menu-tab-btn" data-tab="alcohol">Alcohol Specials</button>
@@ -105,60 +82,8 @@
             
             <!-- Food Menu -->
             <div class="menu-tab-content active" id="food">
-                <!-- Image Viewer -->
-                <div class="menu-viewer" id="foodViewer">
-                    <div class="menu-categories">
-                        <button class="category-btn active" data-category="all">All Pages</button>
-                        <button class="category-btn" data-category="starters">Starters</button>
-                        <button class="category-btn" data-category="mains">Main Courses</button>
-                        <button class="category-btn" data-category="desserts">Desserts</button>
-                    </div>
-                    
-                    <div class="menu-container">
-                        <div class="menu-loading">
-                            <div class="loading-spinner"></div>
-                            Loading menu...
-                        </div>
-                    </div>
-                    
-                    <div class="menu-navigation">
-                        <button class="nav-btn prev-btn" id="prevPage">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        
-                        <div class="page-indicator">
-                            <span>Page</span>
-                            <div class="page-numbers">
-                                <span class="current-page">1</span>
-                                <span>of</span>
-                                <span class="total-pages">5</span>
-                            </div>
-                        </div>
-                        
-                        <button class="nav-btn next-btn" id="nextPage">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="menu-thumbnails">
-                        <!-- Thumbnails will be dynamically loaded here -->
-                    </div>
-                    
-                    <div class="menu-actions">
-                        <button class="action-btn" id="zoomIn">
-                            <i class="fas fa-search-plus"></i> Zoom In
-                        </button>
-                        <button class="action-btn" id="zoomOut">
-                            <i class="fas fa-search-minus"></i> Zoom Out
-                        </button>
-                        <button class="action-btn" id="downloadMenu">
-                            <i class="fas fa-download"></i> Download PDF
-                        </button>
-                    </div>
-                </div>
-                
                 <!-- Text Menu -->
-                <div class="text-menu active" id="foodTextMenu">
+                <div class="text-menu" id="foodTextMenu">
                     <!-- STARTERS -->
                     <div class="menu-category">
                         <h3>STARTERS</h3>
@@ -554,7 +479,7 @@
             
             <!-- Alcohol Specials -->
             <div class="menu-tab-content" id="alcohol">
-                <div class="text-menu active" id="alcoholTextMenu">
+                <div class="text-menu" id="alcoholTextMenu">
                     <!-- COCKTAILS -->
                     <div class="menu-category">
                         <h3>COCKTAILS</h3>
@@ -784,7 +709,7 @@
             
             <!-- Beers & Ciders -->
             <div class="menu-tab-content" id="beers">
-                <div class="text-menu active" id="beersTextMenu">
+                <div class="text-menu" id="beersTextMenu">
                     <div class="menu-category">
                         <h3>BEERS & CIDERS</h3>
                         <div class="menu-grid">
@@ -975,7 +900,7 @@
             
             <!-- Premium Spirits -->
             <div class="menu-tab-content" id="spirits">
-                <div class="text-menu active" id="spiritsTextMenu">
+                <div class="text-menu" id="spiritsTextMenu">
                     <!-- CHAMPAGNE -->
                     <div class="menu-category">
                         <h3>CHAMPAGNE</h3>

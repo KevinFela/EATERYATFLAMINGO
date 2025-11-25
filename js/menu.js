@@ -1,338 +1,388 @@
-// Menu page specific functionality
+// Menu page specific functionality - Text Only Version
 document.addEventListener('DOMContentLoaded', function() {
-    // Menu data structure
-    const menuData = {
-        food: {
-            title: "Food Menu",
-            pages: [
-                { src: 'images/menu-food-1.jpg', alt: 'Food Menu Page 1 - Starters & Appetizers', category: 'starters' },
-                { src: 'images/menu-food-2.jpg', alt: 'Food Menu Page 2 - Main Courses', category: 'mains' },
-                { src: 'images/menu-food-3.jpg', alt: 'Food Menu Page 3 - Grills & Specialties', category: 'mains' },
-                { src: 'images/menu-food-4.jpg', alt: 'Food Menu Page 4 - Pizza & Pasta', category: 'mains' },
-                { src: 'images/menu-food-5.jpg', alt: 'Food Menu Page 5 - Desserts & Drinks', category: 'desserts' }
-            ]
-        },
-        alcohol: {
-            title: "Alcohol Specials",
-            pages: [
-                { src: 'images/menu-alcohol-1.jpg', alt: 'Alcohol Menu Page 1 - Cocktails', category: 'cocktails' },
-                { src: 'images/menu-alcohol-2.jpg', alt: 'Alcohol Menu Page 2 - Shooters & Spirits', category: 'spirits' }
-            ]
-        },
-        beers: {
-            title: "Beers & Ciders",
-            pages: [
-                { src: 'images/menu-beers-1.jpg', alt: 'Beers & Ciders Menu', category: 'beers' }
-            ]
-        },
-        spirits: {
-            title: "Premium Spirits",
-            pages: [
-                { src: 'images/menu-spirits-1.jpg', alt: 'Premium Spirits Menu', category: 'spirits' }
-            ]
-        }
-    };
+    // DOM elements
+    const tabBtns = document.querySelectorAll('.menu-tab-btn');
+    const tabContents = document.querySelectorAll('.menu-tab-content');
+    const textMenus = document.querySelectorAll('.text-menu');
 
     // State management
     let currentTab = 'food';
-    let currentPage = 0;
-    let currentCategory = 'all';
-    let filteredPages = [];
-    let zoomLevel = 1;
-
-    // DOM elements
-    const menuContainer = document.querySelector('.menu-container');
-    const prevBtn = document.getElementById('prevPage');
-    const nextBtn = document.getElementById('nextPage');
-    const currentPageEl = document.querySelector('.current-page');
-    const totalPagesEl = document.querySelector('.total-pages');
-    const thumbnailsContainer = document.querySelector('.menu-thumbnails');
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    const tabBtns = document.querySelectorAll('.menu-tab-btn');
-    const tabContents = document.querySelectorAll('.menu-tab-content');
-    const viewBtns = document.querySelectorAll('.view-btn');
-    const textMenus = document.querySelectorAll('.text-menu');
-    const menuViewers = document.querySelectorAll('.menu-viewer');
 
     // Initialize menu
     function initMenu() {
-        loadMenuPages();
         setupEventListeners();
-        updateNavigation();
+        // Ensure first tab is active on load
+        activateTab('food');
     }
 
-    // Load menu pages for current tab
-    function loadMenuPages() {
-        const menu = menuData[currentTab];
-        if (!menu) return;
-
-        // Filter pages by category
-        filteredPages = currentCategory === 'all' 
-            ? menu.pages 
-            : menu.pages.filter(page => page.category === currentCategory);
-
-        // Clear container
-        menuContainer.innerHTML = '';
-        
-        if (filteredPages.length === 0) {
-            menuContainer.innerHTML = `
-                <div class="menu-loading">
-                    <i class="fas fa-image" style="font-size: 3rem; margin-bottom: 20px;"></i>
-                    <div>No menu pages found for this category</div>
-                </div>
-            `;
-            return;
-        }
-
-        // Create page elements
-        filteredPages.forEach((page, index) => {
-            const pageEl = document.createElement('div');
-            pageEl.className = `menu-page ${getPagePosition(index)}`;
-            pageEl.innerHTML = `
-                <img src="${page.src}" alt="${page.alt}" loading="lazy" 
-                     onerror="this.src='images/placeholder-menu.jpg'">
-            `;
-            menuContainer.appendChild(pageEl);
-        });
-
-        // Reset to first page
-        currentPage = 0;
-        updatePageDisplay();
-        createThumbnails();
-    }
-
-    // Get CSS class for page position
-    function getPagePosition(index) {
-        if (filteredPages.length === 1) return 'center';
-        
-        if (index === currentPage) return 'center';
-        if (index === currentPage - 1) return 'left';
-        if (index === currentPage + 1) return 'right';
-        
-        return 'hidden';
-    }
-
-    // Update page display
-    function updatePageDisplay() {
-        const pages = document.querySelectorAll('.menu-page');
-        pages.forEach((page, index) => {
-            page.className = `menu-page ${getPagePosition(index)}`;
-            
-            // Apply zoom
-            if (index === currentPage) {
-                page.style.transform = `scale(${zoomLevel}) ${getTransform(index)}`;
+    // Activate a specific tab
+    function activateTab(tabId) {
+        // Update active tab button
+        tabBtns.forEach(btn => {
+            if (btn.getAttribute('data-tab') === tabId) {
+                btn.classList.add('active');
             } else {
-                page.style.transform = getTransform(index);
+                btn.classList.remove('active');
             }
         });
 
-        // Update page indicator
-        currentPageEl.textContent = currentPage + 1;
-        totalPagesEl.textContent = filteredPages.length;
-
-        // Update active thumbnail
-        document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
-            thumb.classList.toggle('active', index === currentPage);
+        // Update active tab content
+        tabContents.forEach(content => {
+            if (content.id === tabId) {
+                content.classList.add('active');
+            } else {
+                content.classList.remove('active');
+            }
         });
 
-        updateNavigation();
-    }
-
-    // Get transform for page position
-    function getTransform(index) {
-        if (filteredPages.length === 1) return 'translateZ(0)';
-        
-        if (index === currentPage) return 'translateZ(0)';
-        if (index === currentPage - 1) return 'rotateY(-5deg) translateZ(-1px)';
-        if (index === currentPage + 1) return 'rotateY(5deg) translateZ(-1px)';
-        
-        return 'translateX(100px) scale(0.8)';
-    }
-
-    // Create thumbnails
-    function createThumbnails() {
-        thumbnailsContainer.innerHTML = '';
-        
-        filteredPages.forEach((page, index) => {
-            const thumb = document.createElement('div');
-            thumb.className = `thumbnail ${index === currentPage ? 'active' : ''}`;
-            thumb.innerHTML = `<img src="${page.src}" alt="Page ${index + 1}" loading="lazy">`;
-            thumb.addEventListener('click', () => goToPage(index));
-            thumbnailsContainer.appendChild(thumb);
-        });
-    }
-
-    // Navigation functions
-    function goToPage(pageIndex) {
-        if (pageIndex >= 0 && pageIndex < filteredPages.length) {
-            currentPage = pageIndex;
-            updatePageDisplay();
-        }
-    }
-
-    function nextPage() {
-        if (currentPage < filteredPages.length - 1) {
-            currentPage++;
-            updatePageDisplay();
-        }
-    }
-
-    function prevPage() {
-        if (currentPage > 0) {
-            currentPage--;
-            updatePageDisplay();
-        }
-    }
-
-    // Update navigation buttons state
-    function updateNavigation() {
-        if (prevBtn) prevBtn.disabled = currentPage === 0;
-        if (nextBtn) nextBtn.disabled = currentPage === filteredPages.length - 1;
-    }
-
-    // Zoom functionality
-    function zoomIn() {
-        if (zoomLevel < 2) {
-            zoomLevel += 0.1;
-            updatePageDisplay();
-        }
-    }
-
-    function zoomOut() {
-        if (zoomLevel > 0.5) {
-            zoomLevel -= 0.1;
-            updatePageDisplay();
-        }
-    }
-
-    function resetZoom() {
-        zoomLevel = 1;
-        updatePageDisplay();
-    }
-
-    // View mode toggle
-    function toggleViewMode(mode) {
-        // Update view buttons
-        viewBtns.forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-        
-        // Show/hide appropriate content
-        if (mode === 'images') {
-            textMenus.forEach(menu => menu.classList.remove('active'));
-            menuViewers.forEach(viewer => viewer.classList.add('active'));
-        } else {
-            textMenus.forEach(menu => menu.classList.add('active'));
-            menuViewers.forEach(viewer => viewer.classList.remove('active'));
-        }
+        // Update current tab
+        currentTab = tabId;
     }
 
     // Setup event listeners
     function setupEventListeners() {
-        // Navigation buttons
-        if (prevBtn) prevBtn.addEventListener('click', prevPage);
-        if (nextBtn) nextBtn.addEventListener('click', nextPage);
-
-        // Category buttons
-        categoryBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const category = btn.getAttribute('data-category');
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentCategory = category;
-                loadMenuPages();
-            });
-        });
-
         // Tab buttons
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const tabId = btn.getAttribute('data-tab');
-                
-                // Update active tab
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(tabId).classList.add('active');
-                
-                // Load new tab data
-                currentTab = tabId;
-                currentCategory = 'all';
-                currentPage = 0;
-                zoomLevel = 1;
-                
-                // Reset category buttons
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                categoryBtns[0].classList.add('active');
-                
-                loadMenuPages();
+                activateTab(tabId);
             });
         });
 
-        // View mode buttons
-        viewBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const mode = e.target.getAttribute('data-view');
-                toggleViewMode(mode);
-            });
-        });
-
-        // Action buttons
-        document.getElementById('zoomIn')?.addEventListener('click', zoomIn);
-        document.getElementById('zoomOut')?.addEventListener('click', zoomOut);
-        document.getElementById('downloadMenu')?.addEventListener('click', downloadMenu);
-
-        // Keyboard navigation
+        // Keyboard navigation for tabs
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') prevPage();
-            if (e.key === 'ArrowRight') nextPage();
-            if (e.key === 'Escape') resetZoom();
+            if (e.altKey) {
+                const tabs = ['food', 'alcohol', 'beers', 'spirits'];
+                const currentIndex = tabs.indexOf(currentTab);
+                
+                if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    activateTab(tabs[currentIndex - 1]);
+                } else if (e.key === 'ArrowRight' && currentIndex < tabs.length - 1) {
+                    activateTab(tabs[currentIndex + 1]);
+                } else if (e.key >= '1' && e.key <= '4') {
+                    const tabIndex = parseInt(e.key) - 1;
+                    if (tabIndex < tabs.length) {
+                        activateTab(tabs[tabIndex]);
+                    }
+                }
+            }
         });
 
-        // Touch/swipe support
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        menuContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
+        // Add smooth scrolling to menu sections
+        document.querySelectorAll('.menu-category h3').forEach(heading => {
+            heading.style.cursor = 'pointer';
+            heading.addEventListener('click', () => {
+                heading.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
         });
 
-        menuContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
+        // Add WhatsApp ordering functionality
+        addWhatsAppOrdering();
+    }
+
+    // Add WhatsApp ordering buttons to menu items
+    function addWhatsAppOrdering() {
+        const menuItems = document.querySelectorAll('.menu-item');
+        
+        menuItems.forEach(item => {
+            const itemName = item.querySelector('.menu-item-name').textContent;
+            const itemPrice = item.querySelector('.menu-item-price').textContent;
+            
+            // Create WhatsApp order button
+            const whatsappBtn = document.createElement('a');
+            whatsappBtn.className = 'btn btn-whatsapp';
+            whatsappBtn.style.cssText = 'width: auto; margin-top: 10px; padding: 8px 16px; font-size: 14px;';
+            whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Order Now';
+            whatsappBtn.href = `https://wa.me/27621369848?text=${encodeURIComponent(`Hi Eatery at Flamingo! I'd like to order: ${itemName} - ${itemPrice}`)}`;
+            whatsappBtn.target = '_blank';
+            
+            // Add button to menu item
+            item.appendChild(whatsappBtn);
+        });
+    }
+
+    // Utility function to format prices for display
+    function formatPrice(price) {
+        return price.replace('R', 'R ');
+    }
+
+    // Initialize price formatting
+    function formatAllPrices() {
+        const prices = document.querySelectorAll('.menu-item-price');
+        prices.forEach(priceEl => {
+            const originalPrice = priceEl.textContent;
+            priceEl.textContent = formatPrice(originalPrice);
+        });
+    }
+
+    // Add category navigation
+    function addCategoryNavigation() {
+        const categories = document.querySelectorAll('.menu-category');
+        const navContainer = document.createElement('div');
+        navContainer.className = 'category-navigation';
+        navContainer.style.cssText = 'position: sticky; top: 140px; background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom: 24px; z-index: 99; border: 1px solid #e0e0e0;';
+        
+        const navTitle = document.createElement('h4');
+        navTitle.textContent = 'Quick Navigation';
+        navTitle.style.marginBottom = '10px';
+        navTitle.style.color = 'var(--text-primary)';
+        navContainer.appendChild(navTitle);
+        
+        const navList = document.createElement('div');
+        navList.style.display = 'flex';
+        navList.style.flexWrap = 'wrap';
+        navList.style.gap = '8px';
+        
+        categories.forEach(category => {
+            const categoryName = category.querySelector('h3').textContent;
+            const navButton = document.createElement('button');
+            navButton.className = 'category-nav-btn';
+            navButton.textContent = categoryName;
+            navButton.style.cssText = 'padding: 10px 16px; background: var(--secondary-light); border: 1px solid var(--border-color); border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 13px; white-space: nowrap; font-weight: 600;';
+            
+            navButton.addEventListener('click', () => {
+                category.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Add active state
+                document.querySelectorAll('.category-nav-btn').forEach(btn => {
+                    btn.style.background = 'var(--secondary-light)';
+                    btn.style.color = 'var(--text-primary)';
+                });
+                navButton.style.background = 'var(--accent-pink)';
+                navButton.style.color = 'white';
+            });
+            
+            navButton.addEventListener('mouseenter', () => {
+                if (navButton.style.background !== 'var(--accent-pink)') {
+                    navButton.style.background = 'var(--accent-pink-light)';
+                    navButton.style.color = 'white';
+                }
+            });
+            
+            navButton.addEventListener('mouseleave', () => {
+                if (navButton.style.background !== 'var(--accent-pink)') {
+                    navButton.style.background = 'var(--secondary-light)';
+                    navButton.style.color = 'var(--text-primary)';
+                }
+            });
+            
+            navList.appendChild(navButton);
+        });
+        
+        navContainer.appendChild(navList);
+        
+        // Insert after menu tabs
+        const menuTabs = document.querySelector('.menu-tabs');
+        if (menuTabs) {
+            menuTabs.parentNode.insertBefore(navContainer, menuTabs.nextSibling);
+        }
+    }
+
+    // Add search functionality
+    function addSearchFunctionality() {
+        const searchContainer = document.createElement('div');
+        searchContainer.className = 'menu-search';
+        searchContainer.style.cssText = 'margin: 32px 0; position: sticky; top: 140px; background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); z-index: 99; border: 1px solid #e0e0e0;';
+        
+        searchContainer.innerHTML = `
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <i class="fas fa-search" style="color: var(--accent-pink); font-size: 18px;"></i>
+                <input type="text" id="menuSearch" placeholder="Search menu items..." 
+                       style="flex: 1; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 15px; transition: all 0.3s ease;">
+                <button id="clearSearch" style="padding: 12px 20px; background: var(--text-muted); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.3s ease;">
+                    Clear
+                </button>
+            </div>
+        `;
+        
+        // Insert before menu highlights
+        const menuHighlights = document.querySelector('.menu-highlights');
+        if (menuHighlights) {
+            menuHighlights.parentNode.insertBefore(searchContainer, menuHighlights);
+        }
+        
+        // Add search functionality
+        const searchInput = document.getElementById('menuSearch');
+        const clearButton = document.getElementById('clearSearch');
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            filterMenuItems(searchTerm);
+        });
+        
+        clearButton.addEventListener('click', function() {
+            searchInput.value = '';
+            filterMenuItems('');
         });
 
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            if (touchEndX < touchStartX - swipeThreshold) {
-                nextPage();
-            } else if (touchEndX > touchStartX + swipeThreshold) {
-                prevPage();
+        // Add focus styles
+        searchInput.addEventListener('focus', function() {
+            this.style.borderColor = 'var(--accent-pink)';
+            this.style.boxShadow = '0 0 0 3px rgba(255, 0, 127, 0.1)';
+        });
+
+        searchInput.addEventListener('blur', function() {
+            this.style.borderColor = 'var(--border-color)';
+            this.style.boxShadow = 'none';
+        });
+
+        clearButton.addEventListener('mouseenter', function() {
+            if (searchInput.value) {
+                this.style.background = 'var(--accent-pink)';
+            }
+        });
+
+        clearButton.addEventListener('mouseleave', function() {
+            this.style.background = 'var(--text-muted)';
+        });
+    }
+
+    // Filter menu items based on search term
+    function filterMenuItems(searchTerm) {
+        const menuItems = document.querySelectorAll('.menu-item');
+        const categories = document.querySelectorAll('.menu-category');
+        
+        let hasVisibleItems = false;
+        
+        categories.forEach(category => {
+            const categoryItems = category.querySelectorAll('.menu-item');
+            let categoryHasVisibleItems = false;
+            
+            categoryItems.forEach(item => {
+                const itemName = item.querySelector('.menu-item-name').textContent.toLowerCase();
+                const itemDescription = item.querySelector('.menu-item-description')?.textContent.toLowerCase() || '';
+                
+                if (searchTerm === '' || itemName.includes(searchTerm) || itemDescription.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    categoryHasVisibleItems = true;
+                    hasVisibleItems = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show/hide category based on whether it has visible items
+            category.style.display = categoryHasVisibleItems ? 'block' : 'none';
+        });
+        
+        // Show message if no results
+        showNoResultsMessage(!hasVisibleItems && searchTerm !== '');
+    }
+
+    // Show/hide no results message
+    function showNoResultsMessage(show) {
+        let message = document.getElementById('noResultsMessage');
+        
+        if (show && !message) {
+            message = document.createElement('div');
+            message.id = 'noResultsMessage';
+            message.className = 'no-results-message';
+            message.innerHTML = `
+                <div style="text-align: center; padding: 64px; color: var(--text-muted);">
+                    <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 24px; opacity: 0.5;"></i>
+                    <h3 style="margin-bottom: 16px; color: var(--text-secondary);">No items found</h3>
+                    <p style="color: var(--text-muted); font-size: 1rem;">Try searching with different keywords</p>
+                </div>
+            `;
+            
+            const activeTab = document.querySelector('.menu-tab-content.active');
+            if (activeTab) {
+                activeTab.appendChild(message);
+            }
+        } else if (!show && message) {
+            message.remove();
+        }
+    }
+
+    // Add print functionality
+    function addPrintFunctionality() {
+        const printButton = document.createElement('button');
+        printButton.className = 'btn';
+        printButton.innerHTML = '<i class="fas fa-print"></i> Print Menu';
+        printButton.style.cssText = 'position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: var(--accent-pink); color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease;';
+        
+        printButton.addEventListener('click', function() {
+            window.print();
+        });
+
+        printButton.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+            this.style.boxShadow = '0 8px 25px rgba(255, 0, 127, 0.4)';
+        });
+
+        printButton.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 4px 15px rgba(255, 0, 127, 0.3)';
+        });
+        
+        document.body.appendChild(printButton);
+        
+        // Add print styles
+        const printStyles = document.createElement('style');
+        printStyles.textContent = `
+            @media print {
+                header, footer, .menu-highlights, .menu-tabs, .category-navigation, .menu-search, .btn, .no-results-message {
+                    display: none !important;
+                }
+                
+                .menu-section {
+                    padding: 20px 0 !important;
+                }
+                
+                .menu-category {
+                    break-inside: avoid;
+                    margin-bottom: 30px;
+                    box-shadow: none !important;
+                    border: 1px solid #ddd !important;
+                }
+                
+                .menu-item {
+                    border: 1px solid #ddd !important;
+                    break-inside: avoid;
+                    box-shadow: none !important;
+                }
+                
+                body {
+                    font-size: 12pt;
+                    line-height: 1.4;
+                }
+                
+                .menu-item-price {
+                    color: #000 !important;
+                }
+            }
+        `;
+        document.head.appendChild(printStyles);
+    }
+
+    // Initialize enhanced features
+    function initEnhancedFeatures() {
+        formatAllPrices();
+        addCategoryNavigation();
+        addSearchFunctionality();
+        addPrintFunctionality();
+    }
+
+    // Initialize everything
+    initMenu();
+    initEnhancedFeatures();
+
+    // Add resize handler for responsive adjustments
+    window.addEventListener('resize', function() {
+        // Adjust category navigation for mobile
+        const categoryNav = document.querySelector('.category-navigation');
+        if (categoryNav) {
+            if (window.innerWidth < 768) {
+                categoryNav.style.position = 'static';
+            } else {
+                categoryNav.style.position = 'sticky';
             }
         }
-
-        // Double click to zoom
-        menuContainer.addEventListener('dblclick', (e) => {
-            if (zoomLevel === 1) {
-                zoomIn();
-            } else {
-                resetZoom();
-            }
-        });
-    }
-
-    // Download menu as PDF
-    function downloadMenu() {
-        const currentImage = filteredPages[currentPage];
-        if (!currentImage) return;
-
-        const link = document.createElement('a');
-        link.href = currentImage.src;
-        link.download = `eatery-menu-${currentTab}-page-${currentPage + 1}.jpg`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    // Initialize the menu
-    initMenu();
+    });
 });
